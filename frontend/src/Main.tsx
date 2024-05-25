@@ -10,10 +10,9 @@ const Main = () => {
     start_year: string;
     image: string;
   }
-  const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
-    fetch(`https://cors-anywhere.herokuapp.com/https://comicvine.gamespot.com/api/volumes/?api_key=${apiKey}&format=json&sort=name:asc&limit=10`)
+    fetch(`https://cors-anywhere.herokuapp.com/https://comicvine.gamespot.com/api/volumes/?api_key=${process.env.REACT_APP_API_KEY}&format=json&sort=name:asc&limit=10`)
       .then(response => response.json())
       .then(data => {
         if (data.results) {
