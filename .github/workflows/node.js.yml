@@ -8,13 +8,11 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+defaults:
+  run:
+    working-directory: frontend # The working directory path
 jobs:
-  
   build:
-    defaults:
-      run:
-        working-directory: frontend # The working directory path
 
     runs-on: ubuntu-latest
 
