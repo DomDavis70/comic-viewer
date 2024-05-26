@@ -31,6 +31,10 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build -t domdavis70/comic-viewer:latest ./frontend
     
     env: # Define environment variables here
       REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
