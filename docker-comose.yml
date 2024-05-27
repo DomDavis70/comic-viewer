@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - COMICVINE_API_KEY=${COMICVINE_API_KEY}
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_KEY=${REACT_APP_API_KEY}
+      - REACT_APP_API_URL=http://localhost:8000
+    networks:
+      - app-network
+
+networks:
+  app-network:

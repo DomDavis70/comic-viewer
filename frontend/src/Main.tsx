@@ -12,7 +12,7 @@ const Main = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/volumes`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/volumes`)
       .then(response => response.json())
       .then(data => {
         if (data.results) {
