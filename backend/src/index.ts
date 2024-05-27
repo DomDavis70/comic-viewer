@@ -5,7 +5,7 @@ import cors from 'cors'; // Import the CORS middleware
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 const COMICVINE_API_KEY = process.env.COMICVINE_API_KEY;
 
 // Use the CORS middleware

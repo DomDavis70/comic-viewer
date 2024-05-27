@@ -12,7 +12,7 @@ const Main = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/volumes`)
+    fetch(`http://localhost:8000/api/volumes`)
       .then(response => response.json())
       .then(data => {
         if (data.results) {

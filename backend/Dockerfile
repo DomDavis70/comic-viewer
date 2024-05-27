@@ -21,7 +21,7 @@ RUN npm install --silent
 COPY . ./
 
 # Expose the port
-EXPOSE 3000
+EXPOSE 8000
 
 # Command to run the application
 CMD ["sh", "-c", "COMICVINE_API_KEY=$COMICVINE_API_KEY npm start"]
