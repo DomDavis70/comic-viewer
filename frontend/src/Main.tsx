@@ -12,7 +12,7 @@ const Main = () => {
   }
 
   useEffect(() => {
-    fetch(`https://cors-anywhere.herokuapp.com/https://comicvine.gamespot.com/api/volumes/?api_key=${process.env.REACT_APP_API_KEY}&format=json&sort=name:asc&limit=10`)
+    fetch(`http://localhost:8080/api/volumes`)
       .then(response => response.json())
       .then(data => {
         if (data.results) {
