@@ -1,38 +1,65 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
-const Main = () => {
+interface Volume {
+  id: number;
+  name: string;
+  start_year: string;
+  image: string;
+}
 
+const Main: React.FC = () => {
   const [volumes, setVolumes] = useState<Volume[]>([]);
-
-  interface Volume {
-    id: number;
-    name: string;
-    start_year: string;
-    image: string;
-  }
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/volumes`)
       .then(response => response.json())
       .then(data => {
         if (data.results) {
-          const formattedData = data.results.map((result: any) => ({
+          const formattedData: Volume[] = data.results.map((result: any) => ({
             id: result.id,
             name: result.name,
             start_year: result.start_year,
             image: result.image.small_url
           }));
           setVolumes(formattedData);
-  }})
+        }
+      })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  // Logic for displaying volumes
+  const indexOfLastVolume = currentPage * itemsPerPage;
+  const indexOfFirstVolume = indexOfLastVolume - itemsPerPage;
+  const currentVolumes = volumes.slice(indexOfFirstVolume, indexOfLastVolume);
+
+  // Logic for displaying page numbers
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(volumes.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const handleClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    setCurrentPage(Number(event.currentTarget.id));
+  };
+
+  const renderPageNumbers = pageNumbers.map(number => (
+    <li
+      key={number}
+      id={number.toString()}
+      onClick={handleClick}
+      className={`page-item ${currentPage === number ? 'active' : ''}`}
+    >
+      <span className="page-link">{number}</span>
+    </li>
+  ));
 
   return (
     <div className="container">
       <h1 className="text-center">Volumes</h1>
       <div className="row">
-        {volumes.map(volume => (
+        {currentVolumes.map(volume => (
           <div key={volume.id} className="col-md-4 mb-4">
             <div className="card">
               <img src={volume.image} alt={volume.name} className="card-img-top" />
@@ -44,8 +71,11 @@ const Main = () => {
           </div>
         ))}
       </div>
+      <ul className="pagination justify-content-center">
+        {renderPageNumbers}
+      </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

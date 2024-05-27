@@ -1,52 +1,81 @@
-/* src/App.css */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-h1 {
+.text-center {
   text-align: center;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-li {
-  flex: 1 1 300px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.volume-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
   margin-bottom: 20px;
 }
 
-.volume-details {
-  margin-top: 10px;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.volume-name {
-  font-size: 1.2em;
-  font-weight: bold;
+.card {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.volume-start-year {
-  color: #666;
+.card-img-top {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.25em;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-item .page-link {
+  display: block;
+  padding: 10px 15px;
+  color: #007bff;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.page-item:hover .page-link {
+  background-color: #f0f0f0;
+}
+
+.page-item.disabled .page-link {
+  cursor: not-allowed;
+  color: #999;
 }
