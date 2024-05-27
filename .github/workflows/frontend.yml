@@ -33,7 +33,7 @@ jobs:
     - run: npm test
 
     - name: Build the Docker image
-      run: docker build -t domdavis70/comic-viewer:latest .
+      run: docker build -t domdavis70/comic-frontend:latest .
     
     env: # Define environment variables here
       REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
