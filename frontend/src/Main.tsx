@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import './Main.css';
+import Nav from './Nav';
 
-interface Volume {
-  id: number;
-  name: string;
-  start_year: string;
-  image: string;
-}
+const Main = () => {
 
-const Main: React.FC = () => {
   const [volumes, setVolumes] = useState<Volume[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
+
+  interface Volume {
+    id: number;
+    name: string;
+    start_year: string;
+    image: string;
+  }
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/volumes`)
@@ -57,7 +60,7 @@ const Main: React.FC = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center">Volumes</h1>
+      <Nav/>
       <div className="row">
         {currentVolumes.map(volume => (
           <div key={volume.id} className="col-md-4 mb-4">

@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -7,6 +12,37 @@
 .text-center {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #8FBC8F; /* Pale green */
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.navbar-title {
+  color: white;
+  margin: 0;
+}
+
+.navbar-features {
+  /* Future feature links/buttons styles can go here */
+}
+
+.container {
+  padding-top: 60px; /* Add padding to avoid content being hidden behind the fixed navbar */
 }
 
 .row {
@@ -58,7 +94,7 @@
 .page-item .page-link {
   display: block;
   padding: 10px 15px;
-  color: #007bff;
+  color: #8FBC8F; /* Pale green */
   text-decoration: none;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -66,9 +102,9 @@
 }
 
 .page-item.active .page-link {
-  background-color: #007bff;
+  background-color: #8FBC8F; /* Pale green */
   color: white;
-  border-color: #007bff;
+  border-color: #8FBC8F; /* Pale green */
 }
 
 .page-item:hover .page-link {
