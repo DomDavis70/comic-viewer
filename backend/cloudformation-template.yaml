@@ -50,7 +50,7 @@ Resources:
       Type: application
       IpAddressType: ipv4
       Certificates:
-        - CertificateArn: dd1ede9a-10c9-4156-a4dc-7bae62a88820  # Replace with your SSL certificate ARN
+        - CertificateArn: arn:aws:acm:us-east-2:469782703100:certificate/dd1ede9a-10c9-4156-a4dc-7bae62a88820  # Replace with your SSL certificate ARN
 
   MyListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
@@ -63,7 +63,7 @@ Resources:
       Protocol: HTTPS
       SslPolicy: ELBSecurityPolicy-2016-08  # Specify SSL policy
       Certificates:
-        - CertificateArn: dd1ede9a-10c9-4156-a4dc-7bae62a88820  # Replace with your SSL certificate ARN
+        - CertificateArn: arn:aws:acm:us-east-2:469782703100:certificate/dd1ede9a-10c9-4156-a4dc-7bae62a88820  # Replace with your SSL certificate ARN
 
   MyEC2Instance:
     Type: AWS::EC2::Instance
