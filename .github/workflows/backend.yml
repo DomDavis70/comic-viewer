@@ -56,6 +56,24 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2  # Change to your desired region
 
+    - name: Check if CloudFormation stack exists
+      id: stack-check
+      run: |
+        set -e
+        if aws cloudformation describe-stacks --stack-name my-stack-name; then
+          echo "Stack exists" 
+          echo "::set-output name=stack_exists::true"
+        else
+          echo "Stack does not exist"
+          echo "::set-output name=stack_exists::false"
+        fi
+
+    - name: Delete existing CloudFormation stack
+      if: steps.stack-check.outputs.stack_exists == 'true'
+      run: |
+        aws cloudformation delete-stack --stack-name my-stack-name
+        aws cloudformation wait stack-delete-complete --stack-name my-stack-name
+
     - name: Deploy CloudFormation stack
       run: |
         aws cloudformation deploy \
