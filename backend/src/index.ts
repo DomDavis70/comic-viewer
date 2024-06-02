@@ -10,11 +10,8 @@ const COMICVINE_API_KEY = process.env.COMICVINE_API_KEY;
 
 // Use the CORS middleware
 const corsOptions = {
-  origin: 'https://www.comic-viewer.com', // Replace with your frontend domain
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204
-};
+  origin: 'https://www.comic-viewer.com',
+}
 
 app.use(cors(corsOptions));
 
