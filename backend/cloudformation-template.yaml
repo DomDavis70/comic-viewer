@@ -91,6 +91,12 @@ Resources:
       Tags:
         - Key: Name
           Value: MyEC2Instance
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          SubnetId: subnet-0ae2e0f883ab415a1  # Replace with your subnet ID
+          GroupSet:
+            - !Ref MySecurityGroup
 
 Outputs:
   LoadBalancerDNSName:
