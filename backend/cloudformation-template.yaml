@@ -91,12 +91,19 @@ Resources:
       Tags:
         - Key: Name
           Value: MyEC2Instance
-      NetworkInterfaces:
-        - AssociatePublicIpAddress: true
-          DeviceIndex: 0
-          SubnetId: subnet-0ae2e0f883ab415a1  # Replace with your subnet ID
-          GroupSet:
-            - !Ref MySecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nodejs npm git
+          git clone https://github.com/DomDavis70/comic-viewer.git
+          cd comic-viewer/backend
+          npm install
+          # Retrieve the API key from Parameter Store
+          COMICVINE_API_KEY=$(aws ssm get-parameter --name "/MyApp/COMICVINE_API_KEY" --query "Parameter.Value" --output text)
+          echo "COMICVINE_API_KEY=$COMICVINE_API_KEY" > .env
+          npm start
+
 
 Outputs:
   LoadBalancerDNSName:
