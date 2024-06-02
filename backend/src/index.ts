@@ -9,11 +9,7 @@ const PORT = process.env.PORT || 8000;
 const COMICVINE_API_KEY = process.env.COMICVINE_API_KEY;
 
 // Use the CORS middleware
-const corsOptions = {
-  origin: 'https://www.comic-viewer.com',
-}
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.get('/api/volumes', async (req, res) => {
   try {

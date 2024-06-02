@@ -1,0 +1,79 @@
+Resources:
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow inbound HTTPS and outbound on port 8000
+      VpcId: vpc-0267b53c70218c6ad  # Replace with your VPC ID
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 8000
+          ToPort: 8000
+          CidrIp: 0.0.0.0/0
+
+  MyTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: MyTargetGroup
+      Port: 8000
+      Protocol: HTTP
+      TargetType: instance
+      VpcId: vpc-0267b53c70218c6ad  # Replace with your VPC ID
+      HealthCheckProtocol: HTTP
+      HealthCheckPort: 8000
+      HealthCheckPath: /health  # Example health check path, replace with your own
+
+  MyLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: MyLoadBalancer
+      Subnets: 
+        - subnet-0ae2e0f883ab415a1 # Replace with your subnet IDs
+        - subnet-0d7d6b92b835bd37d  # Replace with your subnet IDs
+      SecurityGroups: 
+        - !Ref MySecurityGroup
+      Scheme: internet-facing
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '60'
+      Tags:
+        - Key: Name
+          Value: MyLoadBalancer
+      Type: application
+      IpAddressType: ipv4
+      Certificates:
+        - CertificateArn: dd1ede9a-10c9-4156-a4dc-7bae62a88820  # Replace with your SSL certificate ARN
+
+  MyListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref MyTargetGroup
+      LoadBalancerArn: !Ref MyLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      SslPolicy: ELBSecurityPolicy-2016-08  # Specify SSL policy
+      Certificates:
+        - CertificateArn: dd1ede9a-10c9-4156-a4dc-7bae62a88820  # Replace with your SSL certificate ARN
+
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref MySecurityGroup
+      SubnetId: subnet-0ae2e0f883ab415a1  # Replace with your subnet ID
+      KeyName: node-ec2-  # Replace with your EC2 key pair name
+      ImageId: ami-0ca2e925753ca2fb4  # Replace with your AMI ID
+      Tags:
+        - Key: Name
+          Value: MyEC2Instance
