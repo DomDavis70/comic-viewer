@@ -83,8 +83,6 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      SecurityGroupIds:
-        - !Ref MySecurityGroup
       KeyName: node-ec2-  # Replace with your EC2 key pair name
       ImageId: ami-0ca2e925753ca2fb4  # Replace with your AMI ID
       Tags:
@@ -106,9 +104,6 @@ Resources:
         - AssociatePublicIpAddress: true
           DeviceIndex: 0
           SubnetId: subnet-0ae2e0f883ab415a1  # Replace with your subnet ID
+          GroupSet:
+            - !Ref MySecurityGroup
 
-
-Outputs:
-  LoadBalancerDNSName:
-    Description: "DNS name of the load balancer"
-    Value: !GetAtt MyLoadBalancer.DNSName
