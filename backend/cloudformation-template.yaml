@@ -103,6 +103,10 @@ Resources:
           COMICVINE_API_KEY=$(aws ssm get-parameter --name "/MyApp/COMICVINE_API_KEY" --query "Parameter.Value" --output text)
           echo "COMICVINE_API_KEY=$COMICVINE_API_KEY" > .env
           npm start
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          SubnetId: subnet-0ae2e0f883ab415a1  # Replace with your subnet ID
 
 
 Outputs:
