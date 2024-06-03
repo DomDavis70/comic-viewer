@@ -85,7 +85,6 @@ Resources:
       InstanceType: t2.micro
       SecurityGroupIds:
         - !Ref MySecurityGroup
-      SubnetId: subnet-0ae2e0f883ab415a1  # Replace with your subnet ID
       KeyName: node-ec2-  # Replace with your EC2 key pair name
       ImageId: ami-0ca2e925753ca2fb4  # Replace with your AMI ID
       Tags:
