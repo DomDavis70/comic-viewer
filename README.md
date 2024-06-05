@@ -1,7 +1,37 @@
 TODO: Fix steps - put more detail
 
-1. create front end with API call
-2. Move the API call to the backend and have frontend get data from the backend
+This is a project that was meant to try out deployment options of a basic full-stack application. It's a single page website that outputs some comic books on the page with a few tabs to scroll through. I used this project to get a better understanding of some AWS services (EC2, Cloudfront, ECS, S3), CI/CD using Git Actions (with security scanners and IaC), Docker, basic networking.
+
+Deployment options:
+    EC2/ S3 + Cloudfront
+    ECS
+
+1. Creating Simple Frontend and Backend
+To start off, I created the frontend and backend with Node.js and are in separate folders (for easier CI/CD and management). The backend fetches data from the [ComicVine API](https://comicvine.gamespot.com/api/documentation) and retrieves a list of comic book volumes from a single endpoint and runs on port 8000. The frontend makes a call to the backend, extracts certain fields like name, a jpg address, and the publisher, and outputs that on a page within a react card component. It also includes pagination so you can click through tabs.
+![Alt text](image.png)
+
+2. CI with Github Actions
+During the creation of the website, I wanted to create a CI process to build and test the code every single time a commit was merged in the repo. There were a couple of workflows added. 
+
+The simplest section of the workflows is the building and testing steps in the frontend and backend (There are separate workflowd for each for easier management).
+
+Ex. 
+``` steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: './frontend/package-lock.json'
+    
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test```
+
+
+
 3. containerize frontend and backend
 4. Create git hub workflow for frontend, backend, SAST and SCA scans, and container scans
 5. Frontend:

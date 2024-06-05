@@ -13,7 +13,7 @@ app.use(cors());
 
 app.get('/api/volumes', async (req, res) => {
   try {
-    const response = await fetch(`https://comicvine.gamespot.com/api/volumes/?api_key=${COMICVINE_API_KEY}&format=json&sort=name:asc&limit=10`);
+    const response = await fetch(`https://comicvine.gamespot.com/api/volumes/?api_key=${COMICVINE_API_KEY}&format=json&sort=name:asc&limit=20`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

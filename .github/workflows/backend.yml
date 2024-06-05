@@ -32,7 +32,6 @@ jobs:
         cache-dependency-path: './backend/package-lock.json'
 
     - run: npm ci
-
     - run: npm run build --if-present
 
     - name: Build the Docker image
@@ -49,34 +48,34 @@ jobs:
     - name: Push the Docker image
       run: docker push domdavis70/comic-backend:latest
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2  # Change to your desired region
+    # - name: Configure AWS credentials
+    #   uses: aws-actions/configure-aws-credentials@v2
+    #   with:
+    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     aws-region: us-east-2  # Change to your desired region
 
-    - name: Check if CloudFormation stack exists
-      id: stack-check
-      run: |
-        set -e
-        if aws cloudformation describe-stacks --stack-name my-stack-name; then
-          echo "Stack exists" 
-          echo "::set-output name=stack_exists::true"
-        else
-          echo "Stack does not exist"
-          echo "::set-output name=stack_exists::false"
-        fi
+    # - name: Check if CloudFormation stack exists
+    #   id: stack-check
+    #   run: |
+    #     set -e
+    #     if aws cloudformation describe-stacks --stack-name my-stack-name; then
+    #       echo "Stack exists" 
+    #       echo "::set-output name=stack_exists::true"
+    #     else
+    #       echo "Stack does not exist"
+    #       echo "::set-output name=stack_exists::false"
+    #     fi
 
-    - name: Delete existing CloudFormation stack
-      if: steps.stack-check.outputs.stack_exists == 'true'
-      run: |
-        aws cloudformation delete-stack --stack-name my-stack-name
-        aws cloudformation wait stack-delete-complete --stack-name my-stack-name
+    # - name: Delete existing CloudFormation stack
+    #   if: steps.stack-check.outputs.stack_exists == 'true'
+    #   run: |
+    #     aws cloudformation delete-stack --stack-name my-stack-name
+    #     aws cloudformation wait stack-delete-complete --stack-name my-stack-name
 
-    - name: Deploy CloudFormation stack
-      run: |
-        aws cloudformation deploy \
-          --template-file cloudformation-template.yaml \
-          --stack-name my-stack-name \
-          --capabilities CAPABILITY_NAMED_IAM
+    # - name: Deploy CloudFormation stack
+    #   run: |
+    #     aws cloudformation deploy \
+    #       --template-file cloudformation-template.yaml \
+    #       --stack-name my-stack-name \
+    #       --capabilities CAPABILITY_NAMED_IAM

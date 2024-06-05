@@ -11,19 +11,19 @@ const Main = () => {
   interface Volume {
     id: number;
     name: string;
-    start_year: string;
+    publisher: string;
     image: string;
   }
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}api/volumes`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/volumes`)
       .then(response => response.json())
       .then(data => {
         if (data.results) {
           const formattedData: Volume[] = data.results.map((result: any) => ({
             id: result.id,
             name: result.name,
-            start_year: result.start_year,
+            publisher: result.publisher.name,
             image: result.image.small_url
           }));
           setVolumes(formattedData);
@@ -68,7 +68,7 @@ const Main = () => {
               <img src={volume.image} alt={volume.name} className="card-img-top" />
               <div className="card-body">
                 <h5 className="card-title">{volume.name}</h5>
-                <p className="card-text">Start Year: {volume.start_year}</p>
+                <p className="card-text">{volume.publisher}</p>
               </div>
             </div>
           </div>
