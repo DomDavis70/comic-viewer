@@ -16,19 +16,21 @@ During the creation of the website, I wanted to create a CI process to build and
 The simplest section of the workflows is the building and testing steps in the frontend and backend (There are separate workflowd for each for easier management).
 
 Ex. 
-``` steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: './frontend/package-lock.json'
-    
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test```
+```
+steps:
+- uses: actions/checkout@v4
+
+- name: Use Node.js ${{ matrix.node-version }}
+  uses: actions/setup-node@v3
+  with:
+    node-version: ${{ matrix.node-version }}
+    cache: 'npm'
+    cache-dependency-path: './frontend/package-lock.json'
+
+- run: npm ci
+- run: npm run build --if-present
+- run: npm test
+```
 
 
 
