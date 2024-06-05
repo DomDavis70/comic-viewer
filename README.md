@@ -8,7 +8,8 @@ Deployment options:
 
 1. Creating Simple Frontend and Backend
 To start off, I created the frontend and backend with Node.js and are in separate folders (for easier CI/CD and management). The backend fetches data from the [ComicVine API](https://comicvine.gamespot.com/api/documentation) and retrieves a list of comic book volumes from a single endpoint and runs on port 8000. The frontend makes a call to the backend, extracts certain fields like name, a jpg address, and the publisher, and outputs that on a page within a react card component. It also includes pagination so you can click through tabs.
-![Alt text](image.png)
+![image](https://github.com/DomDavis70/comic-viewer/assets/42983767/1371558e-e262-4f42-871e-61a26c516714)
+
 
 2. CI with Github Actions
 During the creation of the website, I wanted to create a CI process to build and test the code every single time a commit was merged in the repo. There were a couple of workflows added. 
