@@ -98,7 +98,10 @@ Creating a Hosted Zone was next and necessary to register a domain and configure
 
 <img width="789" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/d62f0ab1-47ab-4097-8926-3cb1282b57d6">
 
-Since we now have our A record to route traffic from our domain to an IP, we can test this out with the S3 address we were given when we enabled static hosting on our bucket. 
+Since we now have our A record to route traffic from our domain to another resource, we can test this out with the S3 address we were given when we enabled static hosting on our bucket. 
+
+<img width="363" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/342a2163-1ad8-4876-b867-4bbcab3e728f">
+
 
 
 
