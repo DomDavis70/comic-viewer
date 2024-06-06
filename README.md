@@ -1,10 +1,8 @@
-TODO: Fix steps - put more detail
-
 This is a project that was meant to try out deployment options of a basic full-stack application. It's a single page website that outputs some comic books on the page with a few tabs to scroll through. I used this project to get a better understanding of some AWS services (EC2, Cloudfront, ECS, S3), CI/CD using Git Actions (with security scanners and IaC), Docker, basic networking.
 
-**Deployment options
+Deployment options
 - EC2/ S3 + Cloudfront
-- ECS**
+- ECS
 
 
 <h1> 1. Creating Simple Frontend and Backend </h1>
