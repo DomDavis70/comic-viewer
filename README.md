@@ -91,31 +91,27 @@ And we can see the backend is up when the instance launches!
 
 
 
+Since the backend was up, the next goal was to create an S3 bucket  to host our static build files. My website would be dubbed `www.comic-viewer.com`, so I named the S3 bucket that. During creation, I allowed read access and enabled static hosting. Within my local repo setup, I then ran `npm run build` to generate the build files from the frontend and uploaded them into S3. 
+
+<img width="1349" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/9f5da7d0-aa36-40ec-a40b-90cae60d8ad0">
 
 
 
 
 
-4. Create git hub workflow for frontend, backend, SAST and SCA scans, and container scans
+
+
+
+
+
+
+
+
 5. Frontend:
     S3 creation: 
         Created a bucket called dom70-frontend-bucket
         Unchecked `Block All Access`
     
-   Backend:
-        EC2 Creation:
-            created VPC, subnet, and security group
-            after creation, I SSH into the EC2 instance by doing 
-                `ssh -i key-file.pem ec2-user@<EC2-public-IP>`
-                Once into the instance, I needed to test out commands to get the backend service running by running these commands:
-                    ```sudo yum update -y
-                    sudo yum install -y nodejs npm git
-                    git clone https://github.com/DomDavis70/comic-viewer.git
-                    cd comic-viewer
-                    npm install
-                    npm start```
-                Now I can see the backend running!
-            to automate this setup, I created a user scrpt on start up
    frontend:
         created a domain called comic-viewer.com
         create 2 a records. One for www.comic-viewer.com and comic-viewer.com
