@@ -8,12 +8,12 @@ Deployment options
 
 Steps taken:
 
-<h1> 1. **Creating Simple Frontend and Backend** </h1>
+<h1> 1. Creating Simple Frontend and Backend </h1>
 To start off, I created the frontend and backend with Node.js and are in separate folders (for easier CI/CD and management). The backend fetches data from the [ComicVine API](https://comicvine.gamespot.com/api/documentation) and retrieves a list of comic book volumes from a single endpoint and runs on port 8000. The frontend makes a call to the backend, extracts certain fields like name, a jpg address, and the publisher, and outputs that on a page within a react card component. It also includes pagination so you can click through tabs.
 <img width="1373" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/93a32eca-5651-44af-8fbb-b8746d7cc87c">
 
 
-2. **CI with Github Actions**  
+<h1> 2. CI with Github Actions </h1>
 During the creation of the website, I wanted to create a CI process to build and test the code every single time a commit was merged in the repo. There were a couple of workflows added.
 
 The simplest section of the workflows is the building and testing steps in the [frontend and backend](https://github.com/DomDavis70/comic-viewer/blob/main/.github/workflows/frontend.yml). There are separate workflows for each for easier management.
@@ -65,7 +65,7 @@ jobs:
 Everytime code is merged, a security report is sent to the Semgrep site for me to view. For example, here it caught 2 CVEs (Common Vunerabilities and Exposures) in my dependencies.
 <img width="1200" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/398ca7b2-934c-402c-99e6-d81fd2062e1e">
 
-3. **Setting Up Infrastructure**
+<h1> 3. Setting Up Infrastructure </h1>
 
 Next was to try and deploy this using EC2 for the backend and S3 + cloudfront for the frontend.
 While creating the EC2, these are the basic settings I configured to make it as cheap as possible. For this small app, anything more is over kill, since our backend just does a single fetch call.
@@ -91,7 +91,6 @@ Userscript:
 And we can see the backend is up when the instance launches!
 
 <img width="602" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/e2d8326e-0db5-40c2-af2f-9632d441ee5d">
-
 
 
 Since the backend was up, the next goal was to create an S3 bucket  to host our static build files. My website would be dubbed `www.comic-viewer.com`, so I named the S3 bucket that. During creation, I allowed read access and enabled static hosting. Within my local repo setup, I then ran `npm run build` to generate the build files from the frontend and uploaded them into S3. 
