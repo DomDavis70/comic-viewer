@@ -68,15 +68,25 @@ Next was to try and deploy this using EC2 for the backend and S3 + cloudfront fo
 While creating the EC2, these are the basic settings I configured to make it as cheap as possible. For this small app, anything more is over kill, since our backend just does a single fetch call.
 <img width="1191" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/a7146363-b077-4dc9-a7f3-6c0b9f92a257">
 
-I also added a userscript containing a simple script to run the backend on startup. 
+I also added a userscript containing a simple script to run the backend on startup. But first I added an entry in AWS Parameter Store since I had an API key env that needed to be set.
 ```
-    sudo yum update -y
-    sudo yum install -y nodejs npm git
-    git clone https://github.com/DomDavis70/comic-viewer.git
-    cd comic-viewer
-    npm install
-    npm start
+aws ssm put-parameter --name "/MyApp/COMICVINE_API_KEY" --value "<API_KEY>" --type "SecureString"
 ```
+Userscript:
+```
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y nodejs npm git
+          git clone https://github.com/DomDavis70/comic-viewer.git
+          cd comic-viewer/backend
+          npm install
+          # Retrieve the API key from Parameter Store
+          COMICVINE_API_KEY=$(aws ssm get-parameter --name "/MyApp/COMICVINE_API_KEY" --query "Parameter.Value" --output text)
+          echo "COMICVINE_API_KEY=$COMICVINE_API_KEY" > .env
+          npm start
+```
+And we can see the backend is up when the instance launches!
+<img width="602" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/e2d8326e-0db5-40c2-af2f-9632d441ee5d">
 
 
 
