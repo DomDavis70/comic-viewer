@@ -6,7 +6,11 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: "www.comic-viewer.com"
-      AccessControl: PublicRead
+      PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
