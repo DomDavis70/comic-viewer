@@ -13,7 +13,7 @@ To start off, I created the frontend and backend with Node.js and are in separat
 2. CI with Github Actions  
 During the creation of the website, I wanted to create a CI process to build and test the code every single time a commit was merged in the repo. There were a couple of workflows added.
 
-The simplest section of the workflows is the building and testing steps in the [frontend and backend](https://github.com/DomDavis70/comic-viewer/blob/main/.github/workflows/frontend.yml) (There are separate workflows for each for easier management).
+The simplest section of the workflows is the building and testing steps in the [frontend and backend](https://github.com/DomDavis70/comic-viewer/blob/main/.github/workflows/frontend.yml). There are separate workflows for each for easier management.
 
 Ex.
 ```
@@ -32,13 +32,40 @@ steps:
 - run: npm test
 ```
 
+The next workflow I wanted to configure is SAST and SCA scanning, although this would run in parallel to the 2 build/test workflows. The primary purpose of SAST and SCA scanners is to scan your source code for vulnerabilities. SAST (Static Application Security Scanning) is a white box testing method to scan your source code for an array of vulnerabilities such as, cross site scripting, SQL injection, buffer overflows etc. SCA (Software Composition Analysis) is a similar process, but scans for third party libraries and dependencies. 
+Deciding on a security scanner was a little difficult, since there are a wide array of options. Some popular ones include SonarQube, Checkmarx, Veracode, Semgrep, Snyk, Whitesource etc. After doing some research and trial and error, I settled on Semgrep due to the free tier being easy to use. I needed to make an account and grab a security key to be able to integrate it into my pipeline. 
 
+Integration (Had to add the token to my repo as a secret): 
 
+```
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/semgrep.yml
+  schedule:
+    # random HH:MM to avoid a load spike on GitHub Actions at 00:00
+    - cron: '12 15 * * *'
+jobs:
+  semgrep:
+    name: semgrep/ci
+    runs-on: ubuntu-20.04
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    container:
+      image: semgrep/semgrep
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      - uses: actions/checkout@v3
+      - run: semgrep ci
+```
+Everytime code is merged, a security report is sent to the Semgrep site for me to view. For example, here it caught 2 CVEs (Common Vunerabilities and Exposures).
+![Alt text](image-1.png)
 
+Next was to try and deploy this using EC2 for the backend and S3 + cloudfront for the frontend.
+While creating the EC2, these are the basic settings I configured to make it as cheap as possible.
+![Alt text](image.png)
 
-
-
-3. containerize frontend and backend
 4. Create git hub workflow for frontend, backend, SAST and SCA scans, and container scans
 5. Frontend:
     S3 creation: 
