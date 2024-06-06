@@ -59,8 +59,9 @@ jobs:
       - uses: actions/checkout@v3
       - run: semgrep ci
 ```
-Everytime code is merged, a security report is sent to the Semgrep site for me to view. For example, here it caught 2 CVEs (Common Vunerabilities and Exposures).
-![Alt text](image-1.png)
+Everytime code is merged, a security report is sent to the Semgrep site for me to view. For example, here it caught 2 CVEs (Common Vunerabilities and Exposures) in my dependencies.
+<img width="1200" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/398ca7b2-934c-402c-99e6-d81fd2062e1e">
+
 
 Next was to try and deploy this using EC2 for the backend and S3 + cloudfront for the frontend.
 While creating the EC2, these are the basic settings I configured to make it as cheap as possible.
