@@ -90,33 +90,18 @@ And we can see the backend is up when the instance launches!
 <img width="602" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/e2d8326e-0db5-40c2-af2f-9632d441ee5d">
 
 
-Since the backend was up, the next goal was to create an S3 bucket  to host our static build files. My website would be dubbed `www.comic-viewer.com`, so I named the S3 bucket that. During creation, I allowed read access and enabled static hosting. Within my local repo setup, I then ran `npm run build` to generate the build files from the frontend and uploaded them into S3. 
+Since the backend was up, the next goal was to create an S3 bucket  to host our static build files. My website would be dubbed `www.comic-viewer.com`, that is what I called the bucket. During creation, I allowed read access and enabled static hosting. Within my local repo setup, I then ran `npm run build` to generate the build files from the frontend and uploaded them into S3. 
 
 <img width="1349" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/9f5da7d0-aa36-40ec-a40b-90cae60d8ad0">
 
+Creating a domain was necessary 
 
-
-
-
-
-
-
-
-
-
-
-
-5. Frontend:
-    S3 creation: 
-        Created a bucket called dom70-frontend-bucket
-        Unchecked `Block All Access`
     
-   frontend:
-        created a domain called comic-viewer.com
-        create 2 a records. One for www.comic-viewer.com and comic-viewer.com
-        Edit the front end to point to the EC2 IP address
-        created 2 certificates for each a record
-        setiing up cloudfront disribution - Redirect HTTP to HTTPS
+  created a domain called comic-viewer.com
+  create 2 a records. One for www.comic-viewer.com and comic-viewer.com
+  Edit the front end to point to the EC2 IP address
+  created 2 certificates for each a record
+  setiing up cloudfront disribution - Redirect HTTP to HTTPS
     
 
 
