@@ -6,11 +6,11 @@ Deployment options
 - EC2/ S3 + Cloudfront
 - ECS
 
-1. Creating Simple Frontend and Backend  
+1. **Creating Simple Frontend and Backend**  
 To start off, I created the frontend and backend with Node.js and are in separate folders (for easier CI/CD and management). The backend fetches data from the [ComicVine API](https://comicvine.gamespot.com/api/documentation) and retrieves a list of comic book volumes from a single endpoint and runs on port 8000. The frontend makes a call to the backend, extracts certain fields like name, a jpg address, and the publisher, and outputs that on a page within a react card component. It also includes pagination so you can click through tabs.
 <img width="1373" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/93a32eca-5651-44af-8fbb-b8746d7cc87c">
 
-2. CI with Github Actions  
+2. **CI with Github Actions**  
 During the creation of the website, I wanted to create a CI process to build and test the code every single time a commit was merged in the repo. There were a couple of workflows added.
 
 The simplest section of the workflows is the building and testing steps in the [frontend and backend](https://github.com/DomDavis70/comic-viewer/blob/main/.github/workflows/frontend.yml). There are separate workflows for each for easier management.
@@ -32,10 +32,10 @@ steps:
 - run: npm test
 ```
 
-The next workflow I wanted to configure is SAST and SCA scanning, although this would run in parallel to the 2 build/test workflows. The primary purpose of SAST and SCA scanners is to scan your source code for vulnerabilities. SAST (Static Application Security Scanning) is a white box testing method to scan your source code for an array of vulnerabilities such as, cross site scripting, SQL injection, buffer overflows etc. SCA (Software Composition Analysis) is a similar process, but scans for third party libraries and dependencies. 
+The next workflow I wanted to configure is SAST and SCA scanning, although this would run in parallel to the 2 build/test workflows. The primary purpose of SAST and SCA scanners is to scan your source code for vulnerabilities. SAST (Static Application Security Scanning) is a white box testing method to scan your source code for an array of vulnerabilities such as, cross site scripting, SQL injection, buffer overflows etc. SCA (Software Composition Analysis) is a similar process, but scans for third party libraries and dependencies.  
 Deciding on a security scanner was a little difficult, since there are a wide array of options. Some popular ones include SonarQube, Checkmarx, Veracode, Semgrep, Snyk, Whitesource etc. After doing some research and trial and error, I settled on Semgrep due to the free tier being easy to use. I needed to make an account and grab a security key to be able to integrate it into my pipeline. 
 
-Integration (Had to add the token to my repo as a secret): 
+Integration (Had to add the token to my repo as a secret):
 
 ```
   push:
@@ -62,10 +62,11 @@ jobs:
 Everytime code is merged, a security report is sent to the Semgrep site for me to view. For example, here it caught 2 CVEs (Common Vunerabilities and Exposures) in my dependencies.
 <img width="1200" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/398ca7b2-934c-402c-99e6-d81fd2062e1e">
 
+3. **Setting Up Infrastructure**
 
 Next was to try and deploy this using EC2 for the backend and S3 + cloudfront for the frontend.
-While creating the EC2, these are the basic settings I configured to make it as cheap as possible.
-![Alt text](image.png)
+While creating the EC2, these are the basic settings I configured to make it as cheap as possible. For this small app, anything more is over kill, since our backend just does a single fetch call.
+
 
 4. Create git hub workflow for frontend, backend, SAST and SCA scans, and container scans
 5. Frontend:
