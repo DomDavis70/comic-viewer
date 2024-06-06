@@ -94,11 +94,17 @@ Since the backend was up, the next goal was to create an S3 bucket  to host our 
 
 <img width="1349" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/9f5da7d0-aa36-40ec-a40b-90cae60d8ad0">
 
-Creating a domain was necessary 
+Creating a Hosted Zone was next and necessary to register a domain and configure our DNS (Domain Name System) settings. After creating a zone, and registering the domain `comic-viewer.com`, I created an A record `www.comic-viewer.com`, so that traffic will be routed to the different IPs when users hit that A record. 
+
+<img width="789" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/d62f0ab1-47ab-4097-8926-3cb1282b57d6">
+
+Since we now have our A record to route traffic from our domain to an IP, we can test this out with the S3 address we were given when we enabled static hosting on our bucket. 
+
+
+
 
     
-  created a domain called comic-viewer.com
-  create 2 a records. One for www.comic-viewer.com and comic-viewer.com
+
   Edit the front end to point to the EC2 IP address
   created 2 certificates for each a record
   setiing up cloudfront disribution - Redirect HTTP to HTTPS
