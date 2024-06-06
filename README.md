@@ -66,6 +66,23 @@ Everytime code is merged, a security report is sent to the Semgrep site for me t
 
 Next was to try and deploy this using EC2 for the backend and S3 + cloudfront for the frontend.
 While creating the EC2, these are the basic settings I configured to make it as cheap as possible. For this small app, anything more is over kill, since our backend just does a single fetch call.
+<img width="1191" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/a7146363-b077-4dc9-a7f3-6c0b9f92a257">
+
+I also added a userscript containing a simple script to run the backend on startup. 
+```
+    sudo yum update -y
+    sudo yum install -y nodejs npm git
+    git clone https://github.com/DomDavis70/comic-viewer.git
+    cd comic-viewer
+    npm install
+    npm start
+```
+
+
+
+
+
+
 
 
 4. Create git hub workflow for frontend, backend, SAST and SCA scans, and container scans
