@@ -114,3 +114,15 @@ And after changing the A record to point to the cloudfront distribution like we 
 <img width="926" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/396051b9-9813-4b82-8cf0-f54ea993d16e">
 
 
+**Problem**: If I try to put the EC2 instance URL as the fetch address for the frontend, we get this error:
+```
+Mixed Content: The page at 'https://dksk7j59neyeu.cloudfront.net/' was loaded over
+main. 6dbf17a7 js:2
+HTTPS, but requested an insecure resource 'http://18.226.181.31:8000/api/volumes'. This request has been blocked; the content must be served over HTTPS. 
+```
+This is due to the traffic being converted to HTTPS by Cloudfront, but the EC2 is operating over HTTP. I used a load balancer to convert this traffic from HTTPS to HTTP, so we can avoid this issue. The load balancer will be a second origin behind Cloudfront and the S3 will point to Cloudfront to route the traffic to the load balancer. 
+
+Creating the load balancer isn't difficult since I used the same VPC and security groups as the EC2. We needed a listener on port `HTTPS:443` and a target group that routes to port `8000` (which the EC2 runs on). After it's deployed, I can see this from the load balancer URL with this message from earlier `Backend server is running!`.  
+Network flow:
+<img width="1353" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/dcfc79a5-058b-4583-844b-b9ccb7dcb0db">
+
