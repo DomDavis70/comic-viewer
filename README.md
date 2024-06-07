@@ -103,10 +103,8 @@ Since we now have our A record to route traffic from our domain to another resou
 <img width="363" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/342a2163-1ad8-4876-b867-4bbcab3e728f">
 <img width="1141" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/588a20e4-b41d-49f8-9e20-21826b75e9d3">
 
-Next, i want to create a certificate for my hosted zone using ACM. This is so we can enable the use of HTTPS with SSL/TLS. 
-<img width="948" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/115291cf-2fe9-4608-925f-df4bf6ff0bce">
-
-We now need to create a Cloudfront distribution to point to the bucket, and have the domain point to the Cloudfront distribution. In cloudfront we need to choose it to point to the s3 bucket. During creation, it's also important to use the same cert tied to your domain! 
+Next, i created a certificate for my hosted zone using ACM. This is so we can enable the use of HTTPS with SSL/TLS.
+And after that I needed to create a Cloudfront distribution to point to the bucket, and have the domain point to the Cloudfront distribution. In cloudfront we need to choose it to point to the s3 bucket. During creation, it's also important to use the same cert tied to your domain! 
 <img width="739" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/7da73b40-1a3a-465f-8003-6f2ee94c8bf5">
  
 And after changing the A record to point to the cloudfront distribution like we did earlier, we now have them linked and we're dealing with HTTPS now!
