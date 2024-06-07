@@ -98,21 +98,8 @@ Creating a Hosted Zone was next and necessary to register a domain and configure
 
 <img width="789" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/d62f0ab1-47ab-4097-8926-3cb1282b57d6">
 
-Since we now have our A record to route traffic from our domain to another resource, we can test this out with the S3 address we were given when we enabled static hosting on our bucket. 
+Since we now have our A record to route traffic from our domain to another resource, we can test this out with the S3 address we were given when we enabled static hosting on our bucket. and we can now see that our domain is mapped to the s3 bucket!
 
 <img width="363" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/342a2163-1ad8-4876-b867-4bbcab3e728f">
-
-
-
-
-
-    
-
-  Edit the front end to point to the EC2 IP address
-  created 2 certificates for each a record
-  setiing up cloudfront disribution - Redirect HTTP to HTTPS
-    
-
-
-
+<img width="1141" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/588a20e4-b41d-49f8-9e20-21826b75e9d3">
 
