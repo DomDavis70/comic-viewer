@@ -109,7 +109,8 @@ Next, i want to create a certificate for my hosted zone using ACM. This is so we
 We now need to create a Cloudfront distribution to point to the bucket, and have the domain point to the Cloudfront distribution. In cloudfront we need to choose it to point to the s3 bucket. During creation, it's also important to use the same cert tied to your domain! 
 <img width="739" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/7da73b40-1a3a-465f-8003-6f2ee94c8bf5">
  
-And after changing the A record to point to the cloudfront distribution like we did earlier, I now have them linked. 
+And after changing the A record to point to the cloudfront distribution like we did earlier, we now have them linked and we're dealing with HTTPS now!
 <img width="767" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/2977f347-277e-4171-8134-6ab072282b32">
+<img width="926" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/396051b9-9813-4b82-8cf0-f54ea993d16e">
 
 
