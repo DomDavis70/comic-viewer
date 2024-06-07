@@ -113,5 +113,3 @@ And after changing the A record to point to the cloudfront distribution like we 
 <img width="767" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/2977f347-277e-4171-8134-6ab072282b32">
 
 
-
-
