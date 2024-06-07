@@ -98,8 +98,20 @@ Creating a Hosted Zone was next and necessary to register a domain and configure
 
 <img width="789" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/d62f0ab1-47ab-4097-8926-3cb1282b57d6">
 
-Since we now have our A record to route traffic from our domain to another resource, we can test this out with the S3 address we were given when we enabled static hosting on our bucket. and we can now see that our domain is mapped to the s3 bucket!
+Since we now have our A record to route traffic from our domain to another resource, we can test this out with the S3 address we were given when we enabled static hosting on our bucket. and we can now see that our domain is mapped to the s3 bucket, but you'll see the comics aren't populating since it's not connected to the backend!
 
 <img width="363" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/342a2163-1ad8-4876-b867-4bbcab3e728f">
 <img width="1141" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/588a20e4-b41d-49f8-9e20-21826b75e9d3">
+
+Next, i want to create a certificate for my hosted zone using ACM. This is so we can enable the use of HTTPS with SSL/TLS. 
+<img width="948" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/115291cf-2fe9-4608-925f-df4bf6ff0bce">
+
+We now need to create a Cloudfront distribution to point to the bucket, and have the domain point to the Cloudfront distribution. In cloudfront we need to choose it to point to the s3 bucket. During creation, it's also important to use the same cert tied to your domain! 
+<img width="739" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/7da73b40-1a3a-465f-8003-6f2ee94c8bf5">
+ 
+And after changing the A record to point to the cloudfront distribution like we did earlier, I now have them linked. 
+<img width="767" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/2977f347-277e-4171-8134-6ab072282b32">
+
+
+
 
