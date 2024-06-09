@@ -123,6 +123,17 @@ HTTPS, but requested an insecure resource 'http://18.226.181.31:8000/api/volumes
 This is due to the traffic being converted to HTTPS by Cloudfront, but the EC2 is operating over HTTP. I used a load balancer to convert this traffic from HTTPS to HTTP, so we can avoid this issue. The load balancer will be a second origin behind Cloudfront and the S3 will point to Cloudfront to route the traffic to the load balancer. 
 
 Creating the load balancer isn't difficult since I used the same VPC and security groups as the EC2. We needed a listener on port `HTTPS:443` and a target group that routes to port `8000` (which the EC2 runs on). After it's deployed, I can see this from the load balancer URL with this message from earlier `Backend server is running!`.  
+
 Network flow:
 <img width="1353" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/dcfc79a5-058b-4583-844b-b9ccb7dcb0db">
+
+And now when we visit `www.comic-viewer.com`, we see the final product deployed with comics back on the page.
+
+<img width="1331" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c2784fa1-7d93-49eb-be54-09f7a81f33ec">
+
+
+**Final Product:**
+
+<img width="746" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c967dddf-2ff0-4a09-b5da-49c2cd58dabb">
+
 
