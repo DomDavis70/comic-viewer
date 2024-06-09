@@ -128,6 +128,7 @@ Network flow:
 <img width="1353" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/dcfc79a5-058b-4583-844b-b9ccb7dcb0db">
 
 And now when we visit `www.comic-viewer.com`, we see the final product deployed with comics back on the page.
+
 <img width="1331" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c2784fa1-7d93-49eb-be54-09f7a81f33ec">
 
 The final architecture will look something like this:
