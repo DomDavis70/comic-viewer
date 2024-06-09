@@ -2,10 +2,10 @@
 FROM node:22-alpine
 
 # Set a build-time argument
-ARG REACT_APP_API_KEY
+ARG REACT_APP_API_URL
 
 # Set the REACT_APP_API_KEY environment variable
-ENV REACT_APP_API_KEY=$REACT_APP_API_KEY
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 # Set the working directory in the container
 WORKDIR /app
@@ -24,4 +24,4 @@ COPY . ./
 EXPOSE 3000
 
 # Command to run the application
-CMD ["sh", "-c", "REACT_APP_API_KEY=$REACT_APP_API_KEY npm start"]
+CMD ["sh", "-c", "REACT_APP_API_URL=$REACT_APP_API_URL npm start"]
