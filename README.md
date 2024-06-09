@@ -131,7 +131,8 @@ And now when we visit `www.comic-viewer.com`, we see the final product deployed 
 
 <img width="1331" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c2784fa1-7d93-49eb-be54-09f7a81f33ec">
 
-The final architecture will look something like this:
+
+**Final Product:**
 
 <img width="746" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c967dddf-2ff0-4a09-b5da-49c2cd58dabb">
 
