@@ -35,7 +35,7 @@ jobs:
     - run: npm run build --if-present
 
     - name: Build the Docker image
-      run: docker build -t comic-backend:latest .
+      run: docker build -t domdavis70/comic-backend:latest .
       env: # Define environment variables here
         COMICVINE_API_KEY: ${{ secrets.COMICVINE_API_KEY }}
 
@@ -46,7 +46,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
     - name: Push the Docker image
-      run: docker push comic-backend:latest
+      run: docker push domdavis70/comic-backend:latest
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -57,7 +57,7 @@ jobs:
     
     - name: Login to ECR Repository
       run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 469782703100.dkr.ecr.us-east-2.amazonaws.com
-           docker tag comic-backend:latest 469782703100.dkr.ecr.us-east-2.amazonaws.com/comic-backend:latest
+           docker tag domdavis70/comic-backend:latest 469782703100.dkr.ecr.us-east-2.amazonaws.com/domdavis70/comic-backend:latest
            docker push 469782703100.dkr.ecr.us-east-2.amazonaws.com/comic-backend:latest
 
     # - name: Check if CloudFormation stack exists
