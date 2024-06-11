@@ -56,7 +56,7 @@ jobs:
         aws-region: us-east-2  # Change to your desired region
     
     - name: Login to ECR Repository
-      run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 469782703100.dkr.ecr.us-east-2.amazonaws.com
+      run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 469782703100.dkr.ecr.us-east-2.amazonaws.com |
            docker tag domdavis70/comic-backend:latest 469782703100.dkr.ecr.us-east-2.amazonaws.com/domdavis70/comic-backend:latest | 
            docker push 469782703100.dkr.ecr.us-east-2.amazonaws.com/comic-backend:latest
 
