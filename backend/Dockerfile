@@ -11,8 +11,8 @@ ENV COMICVINE_API_KEY=$COMICVINE_API_KEY
 WORKDIR /app
 
 # Copy package.json to the container
-COPY package.json .
-RUN npm install --silent
+COPY package-lock.json .
+# RUN npm install --silent
 
 # Copy the rest of the files
 # COPY public/ /frontend/public
