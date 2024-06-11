@@ -40,6 +40,11 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
+    - name: Build the Docker image
+      run: docker build -t domdavis70/comic-backend:latest .
+      env: # Define environment variables here
+        COMICVINE_API_KEY: ${{ secrets.COMICVINE_API_KEY }}
+
     - name: Push the Docker image
       run: docker push domdavis70/comic-backend:latest
 
@@ -50,10 +55,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2  # Change to your desired region
 
-    - name: Build the Docker image
-      run: docker build -t domdavis70/comic-backend:latest .
-      env: # Define environment variables here
-        COMICVINE_API_KEY: ${{ secrets.COMICVINE_API_KEY }}
     
     - name: Login to ECR Repository
       run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 469782703100.dkr.ecr.us-east-2.amazonaws.com |
