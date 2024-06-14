@@ -182,7 +182,7 @@ docker build -t domdavis70/comic-frontend:latest .
 And after the build was successful I wanted to create the containers and run the instances. 
 ```
 docker run -dp 3000:3000 -e REACT_APP_API_URL=http://localhost:8000 --name test-frontend domdavis70/comic-frontend:latest
-docker run -dp 8000:8000 -e COMICVINE_API_KEY=55206fb04584d74983af95ed85ee46ebdd4a458e --name test-backend domdavis70/comic-backend:latest
+docker run -dp 8000:8000 -e COMICVINE_API_KEY=<API_KEY> --name test-backend domdavis70/comic-backend:latest
 ```
 After noticing both containers are running, I opened up Port 3000 to see the applicaton running!
 ```
