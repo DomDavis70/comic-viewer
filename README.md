@@ -184,5 +184,11 @@ And after the build was successful I wanted to create the containers and run the
 docker run -dp 3000:3000 -e REACT_APP_API_URL=http://localhost:8000 --name test-frontend domdavis70/comic-frontend:latest
 docker run -dp 8000:8000 -e COMICVINE_API_KEY=55206fb04584d74983af95ed85ee46ebdd4a458e --name test-backend domdavis70/comic-backend:latest
 ```
-
+After noticing both containers are running, I opened up Port 3000 to see the applicaton running!
+```
+CONTAINER ID   IMAGE                              COMMAND                  CREATED      STATUS          PORTS                    NAMES
+e8974bbbcf19   domdavis70/comic-backend:latest    "docker-entrypoint.s…"   3 days ago   Up 13 seconds   0.0.0.0:8000->8000/tcp   test-backend
+b361cdd8012e   domdavis70/comic-frontend:latest   "docker-entrypoint.s…"   3 days ago   Up 6 seconds    0.0.0.0:3000->3000/tcp   test-frontend
+```
+<img width="1331" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/86e17abd-8420-411a-93c4-cb3714f5b6e2">
 
