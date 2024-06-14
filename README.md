@@ -192,3 +192,31 @@ b361cdd8012e   domdavis70/comic-frontend:latest   "docker-entrypoint.s…"   3 d
 ```
 <img width="1331" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/86e17abd-8420-411a-93c4-cb3714f5b6e2">
 
+And lastly, I can push these images to Docker Hub.
+```
+docker push domdavis70/comic-backend:latest
+```
+
+<h2> 2. Building images through CI/CD and incorporating AWS ECR</h2>
+After the images are built, I wanted to automate this process by adding it in the pipeline. Instead of creating another Github workflow for the building of images, I added the process in after the building and testing stage.
+
+```
+- name: Log in to Docker Hub
+  uses: docker/login-action@v2
+  with:
+    username: ${{ secrets.DOCKER_HUB_USERNAME }}
+    password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+- name: Build the Docker image
+  run: docker build -t domdavis70/comic-backend:latest .
+  env: # Define environment variables here
+    COMICVINE_API_KEY: ${{ secrets.COMICVINE_API_KEY }}
+
+- name: Push the Docker image
+  run: docker push domdavis70/comic-backend:latest
+```
+Even though I'm pushing these images to Docker Hub, I want to use ECR for this project, mainly due to the seamless integration with ECS and for learning purposes. The cost for holding these 2 images should be relatively low as well, since we're not even going to be storing more than 300MB in our ECR repo.
+
+Since this process is going in our CI stage, I needed to create a private repo in ECR. 
+<img width="1110" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/7d941e30-56fa-44f2-871b-147ec9932b76">
+
