@@ -6,7 +6,7 @@ This is a project that was meant to try out deployment options of a basic full-s
 
 <h1 id="ec2-s3--cloudfront"> EC2/ S3 + Cloudfront </h1>
 
-<h2> 1. Creating Simple Frontend and Backend </h1>
+<h2 id="full-stack"> 1. Creating Simple Frontend and Backend </h1>
 To start off, I created the frontend and backend with Node.js and are in separate folders (for easier CI/CD and management). The backend fetches data from the [ComicVine API](https://comicvine.gamespot.com/api/documentation) and retrieves a list of comic book volumes from a single endpoint and runs on port 8000. The frontend makes a call to the backend, extracts certain fields like name, a jpg address, and the publisher, and outputs that on a page within a react card component. It also includes pagination so you can click through tabs.
 <img width="1373" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/93a32eca-5651-44af-8fbb-b8746d7cc87c">
 
@@ -132,9 +132,44 @@ And now when we visit `www.comic-viewer.com`, we see the final product deployed 
 
 <img width="1331" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c2784fa1-7d93-49eb-be54-09f7a81f33ec">
 
-
 **Final Product:**
 
 <img width="746" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c967dddf-2ff0-4a09-b5da-49c2cd58dabb">
 
+
+
+
+<h1>ECS</h1>
+
+<h2> 1. Using Docker to Containerize the App</h2>
+
+In order to deploy this using ECS, I wanted to containerize this application using Docker. Docker is an open-source platform that automates the deployment, scaling, and management of applications using containerization technology. In my case Docker is providing isolation, which ensures solid security and consistency across multiple environments due to the dependencies being the same no matter the container. The main intention behind splitting up the frontend and backend in this project was so that it would be simpler to containerize. 
+
+I touched on the creation of the frontend and backend [here](#full-stack), so the next step was to create dockerfiles for both parts. The docker files for these 2 are almost identical, but for example, here is the backend. 
+
+```
+# Using Node.js base image for version 22
+FROM node:22-alpine
+
+# Set a build-time argument
+ARG COMICVINE_API_KEY
+
+# Set the REACT_APP_API_KEY environment variable
+ENV COMICVINE_API_KEY=$COMICVINE_API_KEY
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json to the container
+COPY package-lock.json .
+
+# Copy the rest of the files
+COPY . ./
+
+# Exposing the port
+EXPOSE 8000
+
+# Command to run the application
+CMD ["sh", "-c", "COMICVINE_API_KEY=$COMICVINE_API_KEY npm start"]
+```
 
