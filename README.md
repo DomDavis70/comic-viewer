@@ -172,4 +172,17 @@ EXPOSE 8000
 # Command to run the application
 CMD ["sh", "-c", "COMICVINE_API_KEY=$COMICVINE_API_KEY npm start"]
 ```
+When testing the building of these images I originally copied over the `package-lock.json` file and had `npm install` in the Dockerfile, but I had trouble with mismatched dependencies when testing locally directly in the source code and running this within a container over the course of a week. I ended up just doing `COPY package-lock.json .` to remove the inconsistencies. So now, the containers will use exactly the same dependencies that were originally pushed up.
+
+After creating the docker file I was able to build them by doing these commands. 
+```
+docker build -t domdavis70/comic-backend:latest .
+docker build -t domdavis70/comic-frontend:latest .
+```
+And after the build was successful I wanted to create the containers and run the instances. 
+```
+docker run -dp 3000:3000 -e REACT_APP_API_URL=http://localhost:8000 --name test-frontend domdavis70/comic-frontend:latest
+docker run -dp 8000:8000 -e COMICVINE_API_KEY=55206fb04584d74983af95ed85ee46ebdd4a458e --name test-backend domdavis70/comic-backend:latest
+```
+
 
