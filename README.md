@@ -220,3 +220,12 @@ Even though I'm pushing these images to Docker Hub, I want to use ECR for this p
 Since this process is going in our CI stage, I needed to create a private repo in ECR. 
 <img width="1110" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/7d941e30-56fa-44f2-871b-147ec9932b76">
 
+Next I needed to login to ECR and push the images I have built. I can now see the images pushed to the repo.
+```
+    - run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin <account>.dkr.ecr.us-east-2.amazonaws.com
+    - run: docker tag domdavis70/comic-backend:latest <account>.dkr.ecr.us-east-2.amazonaws.com/comic-viewer:backend
+    - run: docker push <account>.dkr.ecr.us-east-2.amazonaws.com/comic-viewer:backend
+```
+
+<img width="1117" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c5356561-419b-4971-a504-7368a038d6ad">
+
