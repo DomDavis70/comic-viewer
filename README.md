@@ -244,5 +244,14 @@ Problem: After starting the task, I knew my services were running correctly due 
 
 After fixing this issue, I was able to see the backend and frontend running!
 
-Problem: I couldn't see the contents on the frontend because it wasn't correctly calling to the backend. The error in the console.log stated `Access to fetch at 'http://localhost:8000/api/volumes' from origin 'http://3.142.164.73:3000' has been blocked by CORS policy: The request client is not a secure context and the resource is in more-private address space local.` Apparently, you can't use localhost in an ECS cluster. I needed to set this up to point to the DNS name or public IP of the backend instead. 
+Problem: I couldn't see the contents on the frontend because it wasn't correctly calling to the backend. The error in the console.log stated `Access to fetch at 'http://localhost:8000/api/volumes' from origin 'http://3.142.164.73:3000' has been blocked by CORS policy: The request client is not a secure context and the resource is in more-private address space local.` This was apparently due to a chrome issue that I briefly turned off. [Link](chrome://flags/#block-insecure-private-network-requests). 
+
+I couldn't link the comic-viewer DNS to the ECS without a load balancer, so I went ahead and created one to listen to port 80 and point to a target group with the ecs as the target.
+
+<img width="834" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/21c86071-4f86-4650-abeb-4dc31a0feb7e">
+
+After this, I just needed to point the Route 53 DNS record to the load balancer and I can view the site!
+
+<img width="1329" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/1f13a491-f522-4d2d-b295-dbc86af66d0a">
+
 
