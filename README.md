@@ -229,3 +229,13 @@ Next I needed to login to ECR and push the images I have built. I can now see th
 
 <img width="1117" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/c5356561-419b-4971-a504-7368a038d6ad">
 
+
+To make things a bit simple, I decided to go with Fargate instead of EC2+Linux. This is due to me not exaclty needing anything specific when configuring the instances these containers run on.
+
+<img width="821" alt="image" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/a9a2c08d-3fc6-4347-b329-22ddce8965a9">
+
+Next, I set up the task definition. I had 2 containers being ran in this task. I also created log groups for both containers. Ex. Frontend. 
+<img width="1099" alt="Pasted Graphic" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/d0bac764-bfe7-478c-a19c-22ad4c4e2bcf">
+<img width="834" alt="awslogs-group" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/cc62269d-5bdf-42d0-ad83-b949feb35eaa">
+
+
