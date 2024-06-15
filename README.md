@@ -237,4 +237,12 @@ To make things a bit simple, I decided to go with Fargate instead of EC2+Linux. 
 Next, I set up the task definition. I had 2 containers being ran in this task. I also created log groups for both containers. Ex. Frontend. 
 <img width="1099" alt="Pasted Graphic" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/d0bac764-bfe7-478c-a19c-22ad4c4e2bcf">
 
-I had a choice to run a task or a service. A task would just be a single instance of the task with the specified defintion. A service would be necessary for running a fleet of tasks, but since we just need a single frontend and backend container at all times, I just ran a single standalone task.
+I had a choice to run a task or a service. A task would just be a single instance of the task with the specified defintion. 
+A service would be necessary for running a fleet of tasks, but since we just need a single frontend and backend container at all times, I just ran a single standalone task.
+
+Problem: After starting the task, I knew my services were running correctly due to the health checks and my cloudwatch logs logging as expected, but I still couldn't access the public IP of my Task. THe problem turned out to be the security group not allowing inbound traffic to port 3000 and 8000. 
+
+After fixing this issue, I was able to see the backend and frontend running!
+
+Problem: I couldn't see the contents on the frontend because it wasn't correctly calling to the backend. The error in the console.log stated `Access to fetch at 'http://localhost:8000/api/volumes' from origin 'http://3.142.164.73:3000' has been blocked by CORS policy: The request client is not a secure context and the resource is in more-private address space local.` Apparently, you can't use localhost in an ECS cluster. I needed to set this up to point to the DNS name or public IP of the backend instead. 
+
