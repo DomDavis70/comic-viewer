@@ -237,3 +237,4 @@ To make things a bit simple, I decided to go with Fargate instead of EC2+Linux. 
 Next, I set up the task definition. I had 2 containers being ran in this task. I also created log groups for both containers. Ex. Frontend. 
 <img width="1099" alt="Pasted Graphic" src="https://github.com/DomDavis70/comic-viewer/assets/42983767/d0bac764-bfe7-478c-a19c-22ad4c4e2bcf">
 
+I had a choice to run a task or a service. A task would just be a single instance of the task with the specified defintion. A service would be necessary for running a fleet of tasks, but since we just need a single frontend and backend container at all times, I just ran a single standalone task.
