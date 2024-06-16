@@ -32,8 +32,11 @@ jobs:
 
   docker_push:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
 
-    needs: build  # This ensures `docker_push` runs after `build`
+    needs: build
 
     steps:
     - name: Log in to Docker Hub
@@ -52,8 +55,11 @@ jobs:
 
   ecr_push:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
 
-    needs: docker_push  # This ensures `ecr_push` runs after `docker_push`
+    needs: docker_push
 
     steps:
     - name: Configure AWS credentials
@@ -61,7 +67,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2  # Change to your desired region
+        aws-region: us-east-2
 
     - name: Log in to Amazon ECR
       run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 469782703100.dkr.ecr.us-east-2.amazonaws.com
@@ -75,17 +81,20 @@ jobs:
   # Uncomment the following section when ready to deploy CloudFormation stack
   # deploy_cloudformation:
   #   runs-on: ubuntu-latest
-
-  #   needs: ecr_push  # This ensures `deploy_cloudformation` runs after `ecr_push`
-
+  #   defaults:
+  #     run:
+  #       working-directory: backend
+  # 
+  #   needs: ecr_push
+  # 
   #   steps:
   #   - name: Configure AWS credentials
   #     uses: aws-actions/configure-aws-credentials@v2
   #     with:
   #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
   #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #       aws-region: us-east-2  # Change to your desired region
-
+  #       aws-region: us-east-2
+  # 
   #   - name: Check if CloudFormation stack exists
   #     id: stack-check
   #     run: |
@@ -97,13 +106,13 @@ jobs:
   #         echo "Stack does not exist"
   #         echo "::set-output name=stack_exists::false"
   #       fi
-
+  # 
   #   - name: Delete existing CloudFormation stack
   #     if: steps.stack-check.outputs.stack_exists == 'true'
   #     run: |
   #       aws cloudformation delete-stack --stack-name my-stack-name
   #       aws cloudformation wait stack-delete-complete --stack-name my-stack-name
-
+  # 
   #   - name: Deploy CloudFormation stack
   #     run: |
   #       aws cloudformation deploy \
